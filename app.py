@@ -1,19 +1,27 @@
 import os
 
+from flask_migrate import Migrate
 from flask import Flask
-
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+migrate = Migrate(app, db) 
 
-env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
-
-app.config.from_object(env_config)
+from models import Result
 
 
-@app.route("/")
+@app.route('/')
+def hello():
+    return "Hello World!"
 
-def index():
 
-    secret_key = app.config.get("SECRET_KEY")
+@app.route('/<name>')
+def hello_name(name):
+    return "Hello {}!".format(name)
 
-    return f"The configured secret key is {secret_key}."
+
+if __name__ == '__main__':
+    app.run()

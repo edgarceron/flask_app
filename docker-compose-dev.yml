@@ -1,0 +1,21 @@
+services:
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    environment:
+        POSTGRES_USER: wordcount_dev
+        POSTGRES_PASSWORD: wordcount_dev
+        POSTGRES_DB: wordcount_dev
+    volumes:
+      - /var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wordcount_dev"]
+      interval: 5s
+    networks:
+      - tenshinet
+    ports:
+      - 5432:5432
+
+networks:
+  tenshinet:
