@@ -1,0 +1,2 @@
+heroku pipelines:create --app flaskappemc --stage production flaskappemc
+heroku git:remote --app flaskappemc --remote prod heroku pipelines:add flaskappemc --app flaskappemc-staging --stage staging

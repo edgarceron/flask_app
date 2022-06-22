@@ -17,3 +17,29 @@ class Result(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
+
+class Client(db.Model):
+    __tablename__ = 'client'
+
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String())
+    middle_name = db.Column(db.String())
+    last_name = db.Column(db.String())
+    email = db.Column(db.String())
+    zipcode = db.Column(db.String())
+    city = db.Column(db.String(), nullable=True)
+    country = db.Column(db.String(), nullable=True)
+    state = db.Column(db.String(), nullable=True)
+
+    def __init__(self, first_name, middle_name, last_name, email, zipcode, city=None, country=None, state=None):
+        self.first_name = first_name
+        self.middle_name = middle_name
+        self.last_name = last_name
+        self.email = email
+        self.zipcode = zipcode
+        self.city = city
+        self.country = country
+        self.state = state
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
